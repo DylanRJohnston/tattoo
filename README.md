@@ -7,7 +7,7 @@ Under Hugh Everett's "Many Worlds" interpretation of quantum mechanics the wave 
 
 ## TODO ##
 - [x] Add storybook
-- [ ] Create component hierarchy
+- [ ] Revert to absolute coordinates instead of using nested transforms. Too many issues with preserving shape size.
 - [ ] Add all sigils
   - [x] Three arms
   - [x] Five arms
