@@ -1,5 +1,6 @@
 import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CheckerPlugin } from 'awesome-typescript-loader';
 
 const config: Configuration = {
   entry: './src/app.tsx',
@@ -9,10 +10,10 @@ const config: Configuration = {
   resolve: {
     extensions: ['.js', '.ts', '.tsx']
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin(), new CheckerPlugin()],
   module: {
     rules: [
-      { test: /\.tsx?$/, use: 'ts-loader' }
+      { test: /\.tsx?$/, use: 'awesome-typescript-loader' }
     ]
   }
 }

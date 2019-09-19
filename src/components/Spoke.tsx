@@ -1,5 +1,5 @@
 import React from 'react'
-import { Arms } from './Arms'
+import { ThreeArms } from './sigils/ThreeArms/ThreeArms'
 
 export interface Props {
   arms?: 2 | 3
@@ -9,8 +9,8 @@ export interface Props {
 export const Spoke = ({ arms = 2, body = 'lines' }: Props) => (
   <>
     <path d="M0 0 v100" stroke="black" strokeWidth={4} />
-    <Arms width={15} height={15} />
-    {arms === 3 && <Arms width={30} height={15} />}
+    <ThreeArms />
+    {arms === 3 && <ThreeArms />}
     {body === 'lines' && (
       <>
         <path d="M-8 77 h 16" stroke="black" strokeWidth={4} />

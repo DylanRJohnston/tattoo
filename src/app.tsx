@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
-import { Tatoo } from './tatoo'
-
-const root = document.createElement('div')
-root.setAttribute('id', 'root')
-document.body.appendChild(root)
+import { Tattoo } from './Tattoo'
+import { useRepeatingReRender } from './lib/hooks/useRepeatingReRender';
 
 const Container = ({ children }: { children: React.ReactChild }) => (
   <div
@@ -23,18 +20,19 @@ const Container = ({ children }: { children: React.ReactChild }) => (
   </div>
 )
 
+
 const App = () => {
-  const [state, updateState] = useState({})
-  useEffect(() => {
-    console.log("hey")
-    setTimeout(() => updateState({}), 2000)
-  }, [state])
+  useRepeatingReRender(2000);
 
   return (
     <Container>
-      <Tatoo />
+      <Tattoo />
     </Container>
   )
 }
+
+const root = document.createElement('div')
+root.setAttribute('id', 'root')
+document.body.appendChild(root)
 
 render(<App />, root)
