@@ -21,7 +21,7 @@ const Container = ({ children }: { children: React.ReactChild }) => (
 )
 
 
-const App = () => {
+export const App = () => {
   useRepeatingReRender(2000);
 
   return (
