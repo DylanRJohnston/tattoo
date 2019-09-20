@@ -9,8 +9,8 @@
     "ship": "gh-pages -d dist",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "tslint": "tslint src/**/*.ts*",
-    "prettier": "prettier src/**/*.ts*",
+    "tslint": "tslint 'src/**/*.ts*'",
+    "prettier": "prettier 'src/**/*.ts*' --check",
     "chromatic": "npx chromatic test --app-code=u6uh57ebpqf --exit-zero-on-changes"
   },
   "dependencies": {

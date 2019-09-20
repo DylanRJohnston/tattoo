@@ -1,8 +1,8 @@
-import { storiesOf } from "@storybook/react";
-import { FiveArms } from "./FiveArms";
-import React from "react";
-import { Center } from "../../../../lib/storyComponents/Center";
-import { SVG } from "../../../../lib/storyComponents/SVG";
+import { storiesOf } from "@storybook/react"
+import React from "react"
+import { Center } from "../../../../lib/storyComponents/Center"
+import { SVG } from "../../../../lib/storyComponents/SVG"
+import { FiveArms } from "./FiveArms"
 
 storiesOf("sigils|Five Arms", module)
   .addDecorator(Center)
@@ -11,5 +11,5 @@ storiesOf("sigils|Five Arms", module)
       <SVG width={100} height={33.33} strokeWidth={15}>
         {FiveArms}
       </SVG>
-    );
-  });
+    )
+  })

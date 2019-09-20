@@ -1,14 +1,14 @@
-import React from "react";
-import { ThreeArms } from "../sigils/ThreeArms/ThreeArms";
-import { Altar } from "../sigils/Altar";
-import { Fountain } from "../sigils/Fountain";
-import { FiveArms } from "../sigils/FiveArms";
-import { up } from "../../atoms/Path/types";
-import { Path } from "../../atoms/Path/Path";
+import React from "react"
+import { Path } from "../../atoms/Path/Path"
+import { up } from "../../atoms/Path/types"
+import { Altar } from "../sigils/Altar"
+import { FiveArms } from "../sigils/FiveArms"
+import { Fountain } from "../sigils/Fountain"
+import { ThreeArms } from "../sigils/ThreeArms/ThreeArms"
 
 export interface Props {
-  sigil: "altar" | "fountain" | "three arms" | "five arms";
-  body: "none" | "lines" | "one" | "two" | "three" | "four";
+  sigil: "altar" | "fountain" | "three arms" | "five arms"
+  body: "none" | "lines" | "one" | "two" | "three" | "four"
 }
 
 export const Spoke = ({ sigil }: Props) => (
@@ -21,4 +21,4 @@ export const Spoke = ({ sigil }: Props) => (
       {sigil === "five arms" && <FiveArms width={40} height={20} />}
     </g>
   </>
-);
+)

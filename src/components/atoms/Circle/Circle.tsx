@@ -1,9 +1,9 @@
-import React from "react";
-import { useStrokeWidth } from "../../../lib/hooks/useStrokeWidth";
+import React from "react"
+import { useStrokeWidth } from "../../../lib/hooks/useStrokeWidth"
 
 interface Props {
-  position: [number, number];
-  radius: number;
+  position: [number, number]
+  radius: number
   hollow?: boolean
 }
 
@@ -17,4 +17,4 @@ export const Circle = ({ position: [x, y], radius, hollow }: Props) => (
     fill={hollow ? "white" : "none"}
     vectorEffect="non-scaling-stroke"
   />
-);
+)

@@ -1,23 +1,23 @@
-import { storiesOf } from "@storybook/react";
-import { Tattoo } from "./Tattoo";
-import React, { useState } from "react";
-import { Center } from "../../../lib/storyComponents/Center";
-import { number, button } from "@storybook/addon-knobs";
-import { StrokeWidthProvider } from "../../../lib/hooks/useStrokeWidth";
+import { button, number } from "@storybook/addon-knobs"
+import { storiesOf } from "@storybook/react"
+import React, { useState } from "react"
+import { StrokeWidthProvider } from "../../../lib/hooks/useStrokeWidth"
+import { Center } from "../../../lib/storyComponents/Center"
+import { Tattoo } from "./Tattoo"
 
 storiesOf("organism|Tattoo", module)
   .addDecorator(Center)
   .add("default", () => {
     const strokeWidthKnob = number("Stroke Width", 3, {
-      range: true,
-      min: 1,
       max: 25,
-      step: 1
-    });
+      min: 1,
+      range: true,
+      step: 1,
+    })
 
     const Component = () => {
       const [, setState] = useState({})
-      button('reset', () => setState({}))
+      button("reset", () => setState({}))
 
       return <Tattoo />
     }
@@ -26,9 +26,9 @@ storiesOf("organism|Tattoo", module)
       <StrokeWidthProvider value={strokeWidthKnob}>
         <svg
           style={{
-            width: "90vmin",
+            backgroundColor: "white",
             height: "90vmin",
-            backgroundColor: "white"
+            width: "90vmin",
           }}
           viewBox={`-60 -60 120 120`}
           preserveAspectRatio="xMidYMid meet"

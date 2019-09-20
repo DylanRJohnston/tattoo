@@ -1,10 +1,10 @@
-import React from "react";
-import { Path } from "../../../atoms/Path/Path";
-import { right, up, left } from "../../../atoms/Path/types";
+import React from "react"
+import { Path } from "../../../atoms/Path/Path"
+import { left, right, up } from "../../../atoms/Path/types"
 
 interface Props {
-  width: number;
-  height: number;
+  width: number
+  height: number
 }
 
 export const ThreeArms = ({ width, height }: Props) => (
@@ -13,4 +13,4 @@ export const ThreeArms = ({ width, height }: Props) => (
     <Path path={[up(height)]} />
     <Path path={[right(width / 2), up(height)]} />
   </>
-);
+)

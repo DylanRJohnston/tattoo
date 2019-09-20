@@ -3,7 +3,7 @@ import { useStrokeWidth } from "../../../lib/hooks/useStrokeWidth"
 import { Path as PathType, serialisePath } from "./types"
 
 export interface Props {
-  path: PathType;
+  path: PathType
 }
 
 export const Path = ({ path }: Props) => (
@@ -15,4 +15,4 @@ export const Path = ({ path }: Props) => (
     strokeWidth={useStrokeWidth()}
     vectorEffect="non-scaling-stroke"
   />
-);
+)

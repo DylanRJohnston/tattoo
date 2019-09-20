@@ -1,17 +1,16 @@
-import React from "react";
-import { StoryDecorator } from "@storybook/react";
+import { StoryDecorator } from "@storybook/react"
+import React from "react"
 
 export const Center: StoryDecorator = story => (
   <div
     style={{
-      width: "100vw",
-      height: "100vh",
-
+      alignItems: "center",
       display: "flex",
+      height: "100vh",
       justifyContent: "center",
-      alignItems: "center"
+      width: "100vw",
     }}
   >
     {story()}
   </div>
-);
+)
