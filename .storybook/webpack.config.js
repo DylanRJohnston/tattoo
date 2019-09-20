@@ -7,14 +7,14 @@ module.exports = ({ config }) => ({
       {
         test: /\.tsx?$/,
         use: [
-          { loader: require.resolve('awesome-typescript-loader') },
-          { loader: require.resolve('react-docgen-typescript-loader') },
+          { loader: require.resolve("awesome-typescript-loader") },
+          { loader: require.resolve("react-docgen-typescript-loader") },
         ],
       },
     ],
   },
   resolve: {
     ...config.resolve,
-    extensions: [...config.resolve.extensions, '.ts', '.tsx'],
+    extensions: [...config.resolve.extensions, ".ts", ".tsx"],
   },
 })
