@@ -1,3 +1,3 @@
-import { useRepeatingEffect } from "./useRepeatingEffect"
+import { useRepeatingEffect } from "./useRepeatingEffect";
 
-export const useRepeatingReRender = useRepeatingEffect(() => {})
+export const useRepeatingReRender = useRepeatingEffect(() => { });
