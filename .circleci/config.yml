@@ -1,22 +1,23 @@
 version: 2.1
+orbs:
+  yarn: itinerisltd/yarn@0.4.0
 jobs:
   build:
     docker:
       - image: circleci/node:latest
     steps:
-      - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+      - yarn/install
       - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          name: Build
+          command: yarn run build
+      - persist_to_workspace:
+          root: /tmp/dist
           paths:
-            - ~/.cache/yarn
+            - dist
+  test:
+    docker:
+      - image: circleci/node:latest
+    steps:
       - run:
           name: Prettier
           command: yarn run prettier
@@ -26,3 +27,28 @@ jobs:
       - run:
           name: Chromatic
           command: yarn run chromatic
+  deploy:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - yarn/install
+      - attach_workspace:
+          at: dist
+      - add_ssh_keys:
+          fingerprints:
+            - "3e:7f:fb:32:0a:b7:3f:3f:8f:c8:2d:92:86:5e:34:01"
+      - run:
+          name: Deploy
+          command: yarn run ship
+workflow:
+  build:
+    jobs:
+      - test
+      - build
+      - deploy:
+          requires:
+            - test
+            - build
+          filters:
+            branches:
+              only: master
