@@ -1,28 +1,27 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Tattoo } from './Tattoo'
-import { useRepeatingReRender } from './lib/hooks/useRepeatingReRender';
+import React from "react"
+import { render } from "react-dom"
+import { useRepeatingReRender } from "./lib/hooks/useRepeatingReRender"
+import { Tattoo } from "./Tattoo"
 
 const Container = ({ children }: { children: React.ReactChild }) => (
   <div
     style={{
-      width: '100%',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      boxSizing: 'border-box',
+      alignItems: "center",
+      boxSizing: "border-box",
+      display: "flex",
+      height: "100vh",
+      justifyContent: "center",
+      width: "100%",
     }}
   >
-    <svg viewBox="-60 -60 120 120" style={{ height: '100vmin' }}>
+    <svg viewBox="-60 -60 120 120" style={{ height: "100vmin" }}>
       {children}
     </svg>
   </div>
 )
 
-
 export const App = () => {
-  useRepeatingReRender(2000);
+  useRepeatingReRender(2000)
 
   return (
     <Container>
@@ -31,8 +30,8 @@ export const App = () => {
   )
 }
 
-const root = document.createElement('div')
-root.setAttribute('id', 'root')
+const root = document.createElement("div")
+root.setAttribute("id", "root")
 document.body.appendChild(root)
 
 render(<App />, root)

@@ -1,0 +1,9 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react", "tslint-immutable", "tslint-config-prettier"],
+  "jsRules": {},
+  "rules": {
+    "interface-name": false
+  },
+  "rulesDirectory": []
+}

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Path } from '../../primitives/Path/Path'
-import { right, up, start, left, semiCircle } from '../../primitives/Path/types';
+import React from "react"
+import { Path } from "../../primitives/Path/Path"
+import { right, up, start, left, semiCircle } from "../../primitives/Path/types"
 
 export const Fountain = () => (
   <>

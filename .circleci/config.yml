@@ -18,5 +18,11 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run:
+          name: Prettier
+          command: yarn run prettier
+      - run:
+          name: Lint
+          command: yarn run tslint
+      - run:
           name: Chromatic
           command: yarn run chromatic

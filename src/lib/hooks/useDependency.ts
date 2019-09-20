@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 
 interface Dependency {}
 const newDep = (): Dependency => ({})
