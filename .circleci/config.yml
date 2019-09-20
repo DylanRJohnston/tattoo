@@ -21,7 +21,7 @@ jobs:
           name: Build
           command: yarn run build
       - persist_to_workspace:
-          root: /tmp/dist
+          root: .
           paths:
             - dist
   test:
