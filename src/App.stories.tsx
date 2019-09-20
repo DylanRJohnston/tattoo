@@ -1,5 +1,5 @@
-import { storiesOf } from "@storybook/react"
-import React from "react"
-import { App } from "./app"
+// import { storiesOf } from '@storybook/react'
+// import { App } from './app'
+// import React from 'react'
 
-storiesOf("page|App", module).add("default", () => <App />)
+// storiesOf('page|App', module).add('default', () => <App />)

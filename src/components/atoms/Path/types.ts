@@ -8,7 +8,11 @@ export type Segment =
   | { type: "right"; amount: number }
   | { type: "semiCircle"; radius: number; scale: number; upsideDown: boolean }
 
-export const start = (x: number, y: number): Segment => ({ type: "start", x, y })
+export const start = (x: number, y: number): Segment => ({
+  type: "start",
+  x,
+  y,
+})
 export const up = (amount: number): Segment => ({ type: "up", amount })
 export const down = (amount: number): Segment => ({ type: "down", amount })
 export const left = (amount: number): Segment => ({ type: "left", amount })

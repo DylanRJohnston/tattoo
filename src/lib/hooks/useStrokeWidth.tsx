@@ -1,4 +1,4 @@
-import { useContext, createContext } from "react"
+import { createContext, useContext } from "react"
 
 const defaultStrokeWidth = 15
 const StrokeWidthCtx = createContext(defaultStrokeWidth)

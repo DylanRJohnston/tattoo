@@ -1,7 +1,7 @@
 import React from "react"
-import { InnerRing } from "./components/InnerRing"
-import { OutterRing } from "./components/OuterRing"
-import { Spokes } from "./components/Spokes"
+import { InnerRing } from "./components/molecules/rings/InnerRing"
+import { OutterRing } from "./components/molecules/rings/OuterRing"
+import { Spokes } from "./components/molecules/spoke/Spokes"
 
 export const Tattoo = () => (
   <>

@@ -3,7 +3,9 @@
   "extends": ["tslint:recommended", "tslint-react", "tslint-immutable", "tslint-config-prettier"],
   "jsRules": {},
   "rules": {
-    "interface-name": false
+    "interface-name": false,
+    "no-empty-interface": false,
+    "no-empty": false
   },
   "rulesDirectory": []
 }
