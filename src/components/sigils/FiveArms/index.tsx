@@ -1,1 +1,1 @@
-export * from './FiveArms'
+export * from "./FiveArms"

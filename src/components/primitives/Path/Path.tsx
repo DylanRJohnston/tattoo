@@ -1,6 +1,6 @@
-import React from 'react'
-import { useStrokeWidth } from '../../../lib/hooks/useStrokeWidth'
-import { serialisePath, Path as PathType  } from './types';
+import React from "react"
+import { useStrokeWidth } from "../../../lib/hooks/useStrokeWidth"
+import { Path as PathType, serialisePath } from "./types"
 
 export interface Props {
   path: PathType
