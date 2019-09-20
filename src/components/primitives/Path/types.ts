@@ -38,11 +38,11 @@ const serialiseSegment = (segment: Segment): string => {
   }
 }
 
-export interface Path extends Array<Segment> {}
+export type Path = [Segment, ...Segment[]]
 
 const serialisePathInternal = (path: Path): string => path.map(serialiseSegment).join(' ')
 
 export const serialisePath = (path: Path): string =>
   path[0].type === 'start'
     ? serialisePathInternal(path)
-    : serialisePathInternal([start(0, 0)].concat(path))
+    : serialisePathInternal([start(0, 0), ...path])
