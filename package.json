@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server -d",
     "build": "webpack",
-    "ship": "gh-pages -d dist",
+    "ship": "gh-pages -d dist/ -m [ci skip]",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "tslint": "tslint 'src/**/*.ts*'",
