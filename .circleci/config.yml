@@ -72,11 +72,11 @@ jobs:
       - run:
           name: Setup Git
           command: |
-            git config user.email "ci-build@circleci.com"
+            git config user.email "cid@circleci.com"
             git config user.name "ci-build"
       - add_ssh_keys:
           fingerprints:
-            - "3e:7f:fb:32:0a:b7:3f:3f:8f:c8:2d:92:86:5e:34:01"
+            - "4c:47:89:e6:a4:7c:05:e1:bf:04:81:c8:dc:28:9e:fc"
       - run:
           name: Deploy
           command: yarn run ship
