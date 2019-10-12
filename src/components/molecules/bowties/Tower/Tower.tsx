@@ -10,6 +10,6 @@ export const Tower = ({ width, height }: Props) => (
   <>
     <Path path={[semiCircle(width, "down")]} />
     <Path path={[up(height)]} />
-    <Path path={[start(left(-width / 2), up(height)), right(width)]} />
+    <Path path={[start(left(width / 2), up(height)), right(width)]} />
   </>
 )
