@@ -1,5 +1,5 @@
 import React from "react"
-import { Path, semiCircle, start, up } from "../../../atoms/Path"
+import { Path, semiCircle, up } from "../../../atoms/Path"
 
 interface Props {
   width: number
@@ -9,6 +9,6 @@ interface Props {
 export const Sunrise = ({ width }: Props) => (
   <>
     <Path path={[up(width / 2)]} />
-    <Path path={[start(-width / 2, 0), semiCircle(width, 1, "down")]} />
+    <Path path={[semiCircle(width, 1, "down")]} />
   </>
 )

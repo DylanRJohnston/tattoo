@@ -8,7 +8,7 @@ interface Props {
 
 export const Tower = ({ width, height }: Props) => (
   <>
-    <Path path={[start(-width / 2, 0), semiCircle(width, 1, "down")]} />
+    <Path path={[start(0, 0), semiCircle(width, 1, "down")]} />
     <Path path={[up(height)]} />
     <Path path={[start(-width / 2, -height), right(width)]} />
   </>

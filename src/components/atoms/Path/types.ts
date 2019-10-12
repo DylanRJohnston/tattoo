@@ -36,7 +36,9 @@ const serialiseSegment = (segment: Segment): string => {
     case "right":
       return `h${segment.amount}`
     case "semiCircle":
-      return `a1,${segment.scale} 0,0,${segment.direction === "up" ? 0 : 1} ${segment.radius},0`
+      return `m${-segment.radius / 2},0 a1,${segment.scale} 0,0,${
+        segment.direction === "up" ? 0 : 1
+      } ${segment.radius},0`
     default:
       return assertNever(segment)
   }
