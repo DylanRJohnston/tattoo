@@ -1,6 +1,5 @@
 import React from "react"
-import { Path } from "../../../atoms/Path/Path"
-import { left, right, up } from "../../../atoms/Path/types"
+import { left, Path, right, up } from "../../../atoms/Path"
 
 interface Props {
   width: number

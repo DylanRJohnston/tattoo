@@ -1,12 +1,14 @@
 import React from "react"
 import { InnerRing } from "../../molecules/rings/InnerRing"
 import { OutterRing } from "../../molecules/rings/OuterRing"
-import { Spokes } from "../../molecules/spoke/Spokes"
+import { Props as SpokesProps, Spokes } from "../../molecules/spoke/Spokes"
 
-export const Tattoo = () => (
+interface Props extends SpokesProps {}
+
+export const Tattoo = ({ radius = 1 }: Props) => (
   <>
     <OutterRing />
-    <Spokes />
+    <Spokes radius={0.9 * radius} />
     <InnerRing />
   </>
 )
