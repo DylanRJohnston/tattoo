@@ -2,14 +2,16 @@ import { oneLine } from "common-tags"
 import { assertNever } from "../../../lib/assertNever"
 
 export type Up = { type: "up"; amount: number }
-export type Down = { type: "down"; amount: number }
-export type Left = { type: "left"; amount: number }
-export type Right = { type: "right"; amount: number }
-
 export const up = (amount: number): Up => ({ type: "up", amount })
-export const down = (amount: number): Down => ({ type: "down", amount } as const)
-export const left = (amount: number): Left => ({ type: "left", amount } as const)
-export const right = (amount: number): Right => ({ type: "right", amount } as const)
+
+export type Down = { type: "down"; amount: number }
+export const down = (amount: number): Down => ({ type: "down", amount })
+
+export type Left = { type: "left"; amount: number }
+export const left = (amount: number): Left => ({ type: "left", amount })
+
+export type Right = { type: "right"; amount: number }
+export const right = (amount: number): Right => ({ type: "right", amount })
 
 type SemiCircle = { type: "semiCircle"; radius: number; direction: "up" | "down" }
 export const semiCircle = (radius: number, direction: "up" | "down" = "up"): SemiCircle =>
@@ -19,9 +21,9 @@ export const semiCircle = (radius: number, direction: "up" | "down" = "up"): Sem
     type: "semiCircle",
   } as const)
 
-export type Start = { type: "start"; x: number; y: number }
 export type Directions = Up | Down | Left | Right
 
+export type Start = { type: "start"; x: number; y: number }
 export const start = (...position: Directions[]): Start =>
   position.reduce(
     (acc, it) => {
@@ -41,8 +43,7 @@ export const start = (...position: Directions[]): Start =>
     { type: "start", x: 0, y: 0 },
   )
 
-export type Segment = Directions | Start | SemiCircle
-
+export type Segment = Start | Directions | SemiCircle
 const serialiseSegment = (segment: Segment): string => {
   switch (segment.type) {
     case "start":
