@@ -1,5 +1,5 @@
 import React from "react"
-import { Path, right, semiCircle, start, up } from "../../../atoms/Path"
+import { left, Path, right, semiCircle, start, up } from "../../../atoms/Path"
 
 interface Props {
   width: number
@@ -8,8 +8,8 @@ interface Props {
 
 export const Tower = ({ width, height }: Props) => (
   <>
-    <Path path={[start(0, 0), semiCircle(width, 1, "down")]} />
+    <Path path={[semiCircle(width, "down")]} />
     <Path path={[up(height)]} />
-    <Path path={[start(-width / 2, -height), right(width)]} />
+    <Path path={[start(left(width / 2), up(height)), right(width)]} />
   </>
 )

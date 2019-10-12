@@ -1,27 +1,47 @@
+import { oneLine } from "common-tags"
 import { assertNever } from "../../../lib/assertNever"
 
-export type Segment =
-  | { type: "start"; x: number; y: number }
-  | { type: "up"; amount: number }
-  | { type: "down"; amount: number }
-  | { type: "left"; amount: number }
-  | { type: "right"; amount: number }
-  | { type: "semiCircle"; radius: number; scale: number; direction: "up" | "down" }
+export type Up = { type: "up"; amount: number }
+export type Down = { type: "down"; amount: number }
+export type Left = { type: "left"; amount: number }
+export type Right = { type: "right"; amount: number }
 
-export const start = (x: number, y: number): Segment => ({
-  type: "start",
-  x,
-  y,
-})
-export const up = (amount: number): Segment => ({ type: "up", amount })
-export const down = (amount: number): Segment => ({ type: "down", amount })
-export const left = (amount: number): Segment => ({ type: "left", amount })
-export const right = (amount: number): Segment => ({ type: "right", amount })
-export const semiCircle = (
-  radius: number,
-  scale: number,
-  direction: "up" | "down" = "up",
-): Segment => ({ type: "semiCircle", radius, scale, direction })
+export const up = (amount: number): Up => ({ type: "up", amount })
+export const down = (amount: number): Down => ({ type: "down", amount } as const)
+export const left = (amount: number): Left => ({ type: "left", amount } as const)
+export const right = (amount: number): Right => ({ type: "right", amount } as const)
+
+type SemiCircle = { type: "semiCircle"; radius: number; direction: "up" | "down" }
+export const semiCircle = (radius: number, direction: "up" | "down" = "up"): SemiCircle =>
+  ({
+    direction,
+    radius,
+    type: "semiCircle",
+  } as const)
+
+export type Start = { type: "start"; x: number; y: number }
+export type Directions = Up | Down | Left | Right
+
+export const start = (...position: Directions[]): Start =>
+  position.reduce(
+    (acc, it) => {
+      switch (it.type) {
+        case "up":
+          return { ...acc, y: acc.y - it.amount }
+        case "down":
+          return { ...acc, y: acc.y + it.amount }
+        case "left":
+          return { ...acc, x: acc.x - it.amount }
+        case "right":
+          return { ...acc, x: acc.x + it.amount }
+        default:
+          return assertNever(it)
+      }
+    },
+    { type: "start", x: 0, y: 0 },
+  )
+
+export type Segment = Directions | Start | SemiCircle
 
 const serialiseSegment = (segment: Segment): string => {
   switch (segment.type) {
@@ -36,9 +56,12 @@ const serialiseSegment = (segment: Segment): string => {
     case "right":
       return `h${segment.amount}`
     case "semiCircle":
-      return `m${-segment.radius / 2},0 a1,${segment.scale} 0,0,${
-        segment.direction === "up" ? 0 : 1
-      } ${segment.radius},0`
+      return oneLine`
+        m${-segment.radius / 2},0
+        a1,1
+        0,0,${segment.direction === "up" ? 0 : 1}
+        ${segment.radius},0
+      `
     default:
       return assertNever(segment)
   }
@@ -49,6 +72,4 @@ export type PathSegments = [Segment, ...Segment[]]
 const serialisePathInternal = (path: PathSegments): string => path.map(serialiseSegment).join(" ")
 
 export const serialisePath = (path: PathSegments): string =>
-  path[0].type === "start"
-    ? serialisePathInternal(path)
-    : serialisePathInternal([start(0, 0), ...path])
+  path[0].type === "start" ? serialisePathInternal(path) : serialisePathInternal([start(), ...path])
