@@ -57,19 +57,22 @@ export const App = () => {
   return (
     <>
       <div className="options">
-        <p>
-          Tattoo {num.toLocaleString()} of {numTatoos.toLocaleString()}
-        </p>
         <div className="row">
-          <p>Random</p>
+          <p className={"description"}>Tattoo</p>
+          <p>
+            {num.toLocaleString()} of {numTatoos.toLocaleString()}
+          </p>
+        </div>
+        <div className="row">
+          <p className={"description"}>Random</p>
           <input type="checkbox" checked={random} onChange={() => setRandom(!random)} />
         </div>
         <div className="row">
-          <p>Phase</p>
+          <p className={"description"}>Phase</p>
           <input type="checkbox" checked={phase} onChange={() => setPhase(!phase)} />
         </div>
         <div className="row">
-          <p>{Hz} Hz</p>
+          <p className={"description"}>{Hz} Hz</p>
           <input
             className="slider"
             type="range"
@@ -81,7 +84,7 @@ export const App = () => {
           />
         </div>
         <div className="row">
-          <p>{numSpokes} Spokes</p>
+          <p className={"description"}>{numSpokes} Spokes</p>
           <input
             className="slider"
             type="range"
