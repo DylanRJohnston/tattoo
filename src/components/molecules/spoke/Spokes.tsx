@@ -1,31 +1,35 @@
 import { range } from "fp-ts/lib/Array"
 import React from "react"
-import { Spoke } from "./Spoke"
+import { Props as SpokeProps, Spoke } from "./Spoke"
 
 export interface Props {
-  count?: number
   radius?: number
   phase?: "odd" | "even"
+  spokes?: SpokeProps[]
 }
 
-const oneOf = <A,>(as: A[]): A => as[Math.floor(Math.random() * as.length)]
+const randomInteger = (upper: number, lower: number = 0) =>
+  Math.floor(Math.random() * (upper - lower) + lower)
+const oneOf = <A, _>(...as: A[]): A => as[randomInteger(as.length)]
+const randomSpoke = () =>
+  ({
+    body: oneOf("none", "lines", "one", "two", "three", "four"),
+    sigil: oneOf("altar", "fountain", "three arms", "five arms"),
+  } as const)
 
 export const Spokes = ({
-  count = oneOf([1, 2, 3, 4, 6, 8]),
   radius = 0.9,
-  phase = oneOf(["odd", "even"]),
+  phase = oneOf("odd", "even"),
+  spokes = range(1, randomInteger(8, 1)).map(_ => randomSpoke()),
 }: Props) => (
   <>
-    {range(1, count).map(it => (
+    {spokes.map((props, index) => (
       <g
-        key={it}
-        transform={`rotate(${(it * 360) / count +
-          (phase === "even" ? 0 : 180 / count)}) scale(${0.5 * radius}, ${0.5 * radius})`}
+        key={index}
+        transform={`rotate(${(index * 360) / spokes.length +
+          (phase === "even" ? 0 : 180 / spokes.length)}) scale(${0.5 * radius}, ${0.5 * radius})`}
       >
-        <Spoke
-          sigil={oneOf(["altar", "fountain", "three arms", "five arms"])}
-          body={oneOf(["none", "lines", "one", "two", "three", "four"])}
-        />
+        <Spoke {...props} />
       </g>
     ))}
   </>

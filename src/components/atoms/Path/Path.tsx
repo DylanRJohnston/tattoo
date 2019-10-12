@@ -1,9 +1,9 @@
 import React from "react"
 import { useStrokeWidth } from "../../../lib/hooks/useStrokeWidth"
-import { Path as PathType, serialisePath } from "./types"
+import { PathSegments, serialisePath } from "./types"
 
 export interface Props {
-  path: PathType
+  path: PathSegments
 }
 
 export const Path = ({ path }: Props) => (

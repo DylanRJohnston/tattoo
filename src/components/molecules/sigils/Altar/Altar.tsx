@@ -1,7 +1,6 @@
 import React from "react"
-import { Circle } from "../../../atoms/Circle/Circle"
-import { Path } from "../../../atoms/Path/Path"
-import { right, start } from "../../../atoms/Path/types"
+import { Circle } from "../../../atoms/Circle"
+import { Path, right, start } from "../../../atoms/Path"
 import { ThreeArms } from "../ThreeArms"
 
 interface Props {

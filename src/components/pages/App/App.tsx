@@ -1,9 +1,13 @@
 import React from "react"
-import { useRepeatingReRender } from "../../lib/hooks/useRepeatingReRender"
-import { StrokeWidthProvider } from "../../lib/hooks/useStrokeWidth"
-import { Tattoo } from "../organisms/Tatoo/Tattoo"
+import { useRepeatingReRender } from "../../../lib/hooks/useRepeatingReRender"
+import { StrokeWidthProvider } from "../../../lib/hooks/useStrokeWidth"
+import { Tattoo } from "../../organisms/Tatoo"
 
-const Container = ({ children }: { children: React.ReactChild }) => (
+interface Props {
+  children: React.ReactChild
+}
+
+const Container = ({ children }: Props) => (
   <div
     style={{
       alignItems: "center",
@@ -14,7 +18,7 @@ const Container = ({ children }: { children: React.ReactChild }) => (
       width: "100%",
     }}
   >
-    <StrokeWidthProvider value={3}>
+    <StrokeWidthProvider value={10}>
       <svg viewBox="-60 -60 120 120" style={{ height: "100vmin" }}>
         {children}
       </svg>
