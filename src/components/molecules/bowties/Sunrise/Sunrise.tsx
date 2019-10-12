@@ -9,6 +9,6 @@ interface Props {
 export const Sunrise = ({ width }: Props) => (
   <>
     <Path path={[up(width / 2)]} />
-    <Path path={[semiCircle(width, 1, "down")]} />
+    <Path path={[semiCircle(width, "down")]} />
   </>
 )
