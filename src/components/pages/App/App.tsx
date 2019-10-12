@@ -28,7 +28,7 @@ const numberToTatoo = (num: number, numSpokes: number) => {
 export const App = () => {
   const [num, setNum] = useState(1)
   const [Hz, setHz] = useState(1)
-  const [random, setRandom] = useState(false)
+  const [random, setRandom] = useState(true)
   const [numSpokes, setNumSpokes] = useState(3)
   const [phase, setPhase] = useState(false)
 
