@@ -7,12 +7,12 @@ Under Hugh Everett's "Many Worlds" interpretation of quantum mechanics the wave 
 
 ## TODO ##
 - [x] Add storybook
-- [ ] Revert to absolute coordinates instead of using nested transforms. Too many issues with preserving shape size.
+- [x] Revert to absolute coordinates instead of using nested transforms. Too many issues with preserving shape size.
 - [ ] Add all sigils
   - [x] Three arms
   - [x] Five arms
   - [x] Fountain
-  - [ ] Altar
+  - [x] Altar
   - [ ] Football
   - [ ] Forest
 - [ ] Add all decorators
@@ -20,8 +20,8 @@ Under Hugh Everett's "Many Worlds" interpretation of quantum mechanics the wave 
   - [x] Half circle
   - [x] Half circle with line
   - [x] Two half circles with line
-  - [ ] Two half circles with dots
-- [ ] Lehmer codes
+  - [x] Two half circles with dots
+- [x] Lehmer codes
 - [ ] Quantum Random Number genenerator API
 - [ ] Interactive mode
 
