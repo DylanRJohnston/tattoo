@@ -1,5 +1,5 @@
 import React from "react"
-import { left, Path, right, start, up } from "../../../atoms/Path"
+import { bar, Path, start, up } from "../../../atoms/Path"
 
 interface Props {
   width: number
@@ -9,8 +9,8 @@ interface Props {
 export const Lines = ({ width, height }: Props) => (
   <>
     <Path path={[up(height)]} />
-    <Path path={[start(left(width / 2)), right(width)]} />
-    <Path path={[start(left(width / 2), up(height / 2)), right(width)]} />
-    <Path path={[start(left(width / 2), up(height)), right(width)]} />
+    <Path path={[bar(width)]} />
+    <Path path={[start(up(height / 2)), bar(width)]} />
+    <Path path={[start(up(height)), bar(width)]} />
   </>
 )

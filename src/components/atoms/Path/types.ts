@@ -2,14 +2,21 @@ import { oneLine } from "common-tags"
 import { assertNever } from "../../../lib/assertNever"
 
 export type Up = { type: "up"; amount: number }
-export type Down = { type: "down"; amount: number }
-export type Left = { type: "left"; amount: number }
-export type Right = { type: "right"; amount: number }
-
 export const up = (amount: number): Up => ({ type: "up", amount })
-export const down = (amount: number): Down => ({ type: "down", amount } as const)
-export const left = (amount: number): Left => ({ type: "left", amount } as const)
-export const right = (amount: number): Right => ({ type: "right", amount } as const)
+
+export type Down = { type: "down"; amount: number }
+export const down = (amount: number): Down => ({ type: "down", amount })
+
+export type Left = { type: "left"; amount: number }
+export const left = (amount: number): Left => ({ type: "left", amount })
+
+export type Right = { type: "right"; amount: number }
+export const right = (amount: number): Right => ({ type: "right", amount })
+
+export type Directions = Up | Down | Left | Right
+
+export type Bar = { type: "bar"; width: number }
+export const bar = (width: number): Bar => ({ type: "bar", width })
 
 type SemiCircle = { type: "semiCircle"; radius: number; direction: "up" | "down" }
 export const semiCircle = (radius: number, direction: "up" | "down" = "up"): SemiCircle =>
@@ -20,8 +27,6 @@ export const semiCircle = (radius: number, direction: "up" | "down" = "up"): Sem
   } as const)
 
 export type Start = { type: "start"; x: number; y: number }
-export type Directions = Up | Down | Left | Right
-
 export const start = (...position: Directions[]): Start =>
   position.reduce(
     (acc, it) => {
@@ -41,12 +46,13 @@ export const start = (...position: Directions[]): Start =>
     { type: "start", x: 0, y: 0 },
   )
 
-export type Segment = Directions | Start | SemiCircle
-
+export type Segment = Bar | Start | SemiCircle | Directions
 const serialiseSegment = (segment: Segment): string => {
   switch (segment.type) {
     case "start":
       return `M${segment.x},${segment.y}`
+    case "bar":
+      return `m${-segment.width / 2},0 h${segment.width}`
     case "up":
       return `v-${segment.amount}`
     case "down":

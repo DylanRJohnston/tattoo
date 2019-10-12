@@ -6,10 +6,12 @@ interface Props {
   position?: Directions[]
   radius: number
   fill?: "white" | "black" | "none"
+  strokeWidth?: number
 }
 
-export const Circle = ({ position = [], radius, fill = "none" }: Props) => {
+export const Circle = ({ position = [], radius, fill = "none", strokeWidth }: Props) => {
   const { x, y } = start(...position)
+  const envStrokeWidth = useStrokeWidth()
 
   return (
     <circle
@@ -17,7 +19,7 @@ export const Circle = ({ position = [], radius, fill = "none" }: Props) => {
       cy={y}
       r={radius}
       stroke="black"
-      strokeWidth={useStrokeWidth()}
+      strokeWidth={strokeWidth === undefined ? envStrokeWidth : strokeWidth}
       fill={fill}
       vectorEffect="non-scaling-stroke"
     />

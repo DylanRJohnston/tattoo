@@ -1,39 +1,26 @@
 import React from "react"
 import { Path, up } from "../../atoms/Path"
-import { Altar } from "../sigils/Altar"
-import { FiveArms } from "../sigils/FiveArms"
-import { Fountain } from "../sigils/Fountain"
-import { ThreeArms } from "../sigils/ThreeArms"
-
-type Sigils = "altar" | "fountain" | "three arms" | "five arms"
+import { bowties, Names as BowtieNames } from "../bowties"
+import { Names as SigilNames, sigils } from "../sigils"
 
 export interface Props {
-  sigil: Sigils
-  body: "none" | "lines" | "one" | "two" | "three" | "four"
+  sigil: SigilNames
+  bowtie: BowtieNames
 }
 
-export const Spoke = ({ sigil }: Props) => (
-  <>
-    <Path path={[up(100)]} />
-    {sigil === "altar" && (
-      <g transform="translate(0, -70)">
-        <Altar width={40} height={30} />
+export const Spoke = ({ sigil, bowtie }: Props) => {
+  const { Component: Sigil, ...sigilProps } = sigils[sigil]
+  const { Component: Bowtie, ...bowtieProps } = bowties[bowtie]
+
+  return (
+    <>
+      <Path path={[up(100)]} />
+      <g transform={`translate(0, ${sigilProps.height - 100})`}>
+        <Sigil {...sigilProps} />
       </g>
-    )}
-    {sigil === "fountain" && (
-      <g transform="translate(0, -80)">
-        <Fountain width={50} height={20} />
+      <g transform={`translate(0, ${sigilProps.height + bowtieProps.height - 90})`}>
+        <Bowtie {...bowtieProps} />
       </g>
-    )}
-    {sigil === "three arms" && (
-      <g transform="translate(0, -80)">
-        <ThreeArms width={40} height={20} />
-      </g>
-    )}
-    {sigil === "five arms" && (
-      <g transform="translate(0, -80)">
-        <FiveArms width={60} height={20} />
-      </g>
-    )}
-  </>
-)
+    </>
+  )
+}
