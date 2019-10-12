@@ -58,7 +58,7 @@ export const App = () => {
     <>
       <div className="options">
         <p>
-          Tattoo {num} of {numTatoos}
+          Tattoo {num.toLocaleString()} of {numTatoos.toLocaleString()}
         </p>
         <div className="row">
           <p>Random</p>
@@ -93,7 +93,7 @@ export const App = () => {
         </div>
       </div>
       <Container>
-        <Tattoo phase={phase ? "even" : "odd"} spokes={numberToTatoo(num - 1, numSpokes)} />
+        <Tattoo phase={phase ? "odd" : "even"} spokes={numberToTatoo(num - 1, numSpokes)} />
       </Container>
     </>
   )
