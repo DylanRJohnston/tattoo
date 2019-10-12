@@ -13,6 +13,11 @@ export const left = (amount: number): Left => ({ type: "left", amount })
 export type Right = { type: "right"; amount: number }
 export const right = (amount: number): Right => ({ type: "right", amount })
 
+export type Directions = Up | Down | Left | Right
+
+export type Bar = { type: "bar"; width: number }
+export const bar = (width: number): Bar => ({ type: "bar", width })
+
 type SemiCircle = { type: "semiCircle"; radius: number; direction: "up" | "down" }
 export const semiCircle = (radius: number, direction: "up" | "down" = "up"): SemiCircle =>
   ({
@@ -20,8 +25,6 @@ export const semiCircle = (radius: number, direction: "up" | "down" = "up"): Sem
     radius,
     type: "semiCircle",
   } as const)
-
-export type Directions = Up | Down | Left | Right
 
 export type Start = { type: "start"; x: number; y: number }
 export const start = (...position: Directions[]): Start =>
@@ -43,11 +46,13 @@ export const start = (...position: Directions[]): Start =>
     { type: "start", x: 0, y: 0 },
   )
 
-export type Segment = Start | Directions | SemiCircle
+export type Segment = Bar | Start | SemiCircle | Directions
 const serialiseSegment = (segment: Segment): string => {
   switch (segment.type) {
     case "start":
       return `M${segment.x},${segment.y}`
+    case "bar":
+      return `m${-segment.width / 2},0 h${segment.width}`
     case "up":
       return `v-${segment.amount}`
     case "down":
