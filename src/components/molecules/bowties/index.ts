@@ -1,17 +1,19 @@
 import * as t from "io-ts"
-import { Lines } from "../bowties/Lines"
-import { Peek } from "../bowties/Peek"
-import { Starjump } from "../bowties/Starjump"
-import { Sunrise } from "../bowties/Sunrise"
-import { Tower } from "../bowties/Tower"
+import { Lines } from "./Lines"
+import { None } from "./None/None"
+import { Peek } from "./Peek"
+import { Starjump } from "./Starjump"
+import { Sunrise } from "./Sunrise"
+import { Tower } from "./Tower"
 
 export type Names = t.TypeOf<typeof Names>
 export const Names = t.union([
-  t.literal("Lines"),
-  t.literal("Peek"),
-  t.literal("Starjump"),
+  t.literal("None"),
   t.literal("Sunrise"),
   t.literal("Tower"),
+  t.literal("Starjump"),
+  t.literal("Peek"),
+  t.literal("Lines"),
 ])
 
 interface Bowtie {
@@ -25,6 +27,11 @@ export const bowties: Record<Names, Bowtie> = {
     Component: Lines,
     height: 15,
     width: 15,
+  },
+  None: {
+    Component: None,
+    height: 0,
+    width: 0,
   },
   Peek: {
     Component: Peek,

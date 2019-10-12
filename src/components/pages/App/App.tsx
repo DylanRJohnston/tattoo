@@ -1,37 +1,100 @@
-import React from "react"
-import { useRepeatingReRender } from "../../../lib/hooks/useRepeatingReRender"
-import { StrokeWidthProvider } from "../../../lib/hooks/useStrokeWidth"
-import { Tattoo } from "../../organisms/Tatoo"
+import React, { useEffect, useState } from "react"
+import { Names as BowtieNames } from "../../molecules/bowties"
+import { Names as SigilNames } from "../../molecules/sigils"
+import { Props, Tattoo } from "../../organisms/Tatoo"
+import "./App.css"
+import { Container } from "./Container"
 
-interface Props {
-  children: React.ReactChild
+const numBowties = BowtieNames.types.length
+const numSigils = SigilNames.types.length
+
+const spokeRadix = numBowties * numSigils
+
+const numberToTatoo = (num: number, numSpokes: number) => {
+  const spokes: Props["spokes"] = []
+
+  let workingNum = num
+  for (let i = 0; i < numSpokes; i++) {
+    const bowtie = (workingNum % spokeRadix) % numBowties
+    const sigil = Math.floor((workingNum % spokeRadix) / numBowties)
+
+    spokes.push({ bowtie: BowtieNames.types[bowtie].value, sigil: SigilNames.types[sigil].value })
+    workingNum = Math.floor(workingNum / spokeRadix)
+  }
+
+  return spokes
 }
 
-const Container = ({ children }: Props) => (
-  <div
-    style={{
-      alignItems: "center",
-      boxSizing: "border-box",
-      display: "flex",
-      height: "100vh",
-      justifyContent: "center",
-      width: "100%",
-    }}
-  >
-    <StrokeWidthProvider value={10}>
-      <svg viewBox="-60 -60 120 120" style={{ height: "100vmin" }}>
-        {children}
-      </svg>
-    </StrokeWidthProvider>
-  </div>
-)
-
 export const App = () => {
-  useRepeatingReRender(2000)
+  const [num, setNum] = useState(1)
+  const [Hz, setHz] = useState(1)
+  const [random, setRandom] = useState(false)
+  const [numSpokes, setNumSpokes] = useState(3)
+  const [phase, setPhase] = useState(false)
+
+  const numTatoos = spokeRadix ** numSpokes
+
+  useEffect(() => {
+    if (Hz === 0) {
+      return
+    }
+    const interval = Math.floor(1000 / Hz)
+
+    let nextNum = num + 1
+    if (nextNum > numTatoos) {
+      nextNum = 1
+    }
+
+    if (random) {
+      nextNum = Math.ceil(Math.random() * numTatoos)
+    }
+
+    const timeout = setTimeout(() => setNum(nextNum), interval)
+
+    return () => clearTimeout(timeout)
+  }, [num, Hz, random])
 
   return (
-    <Container>
-      <Tattoo />
-    </Container>
+    <>
+      <div className="options">
+        <p>
+          Tattoo {num} of {numTatoos}
+        </p>
+        <div className="row">
+          <p>Random</p>
+          <input type="checkbox" checked={random} onChange={() => setRandom(!random)} />
+        </div>
+        <div className="row">
+          <p>Phase</p>
+          <input type="checkbox" checked={phase} onChange={() => setPhase(!phase)} />
+        </div>
+        <div className="row">
+          <p>{Hz} Hz</p>
+          <input
+            className="slider"
+            type="range"
+            min="0"
+            max="20"
+            value={Hz}
+            onChange={it => setHz(parseInt(it.target.value))}
+            id="myRange"
+          />
+        </div>
+        <div className="row">
+          <p>{numSpokes} Spokes</p>
+          <input
+            className="slider"
+            type="range"
+            value={numSpokes}
+            onChange={it => setNumSpokes(parseInt(it.target.value))}
+            min="1"
+            max="8"
+          />
+        </div>
+      </div>
+      <Container>
+        <Tattoo phase={phase ? "even" : "odd"} spokes={numberToTatoo(num - 1, numSpokes)} />
+      </Container>
+    </>
   )
 }

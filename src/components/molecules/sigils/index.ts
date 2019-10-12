@@ -1,15 +1,16 @@
 import * as t from "io-ts"
-import { Altar } from "../sigils/Altar"
-import { FiveArms } from "../sigils/FiveArms"
-import { Fountain } from "../sigils/Fountain"
-import { ThreeArms } from "../sigils/ThreeArms"
+import { Altar } from "./Altar"
+import { FiveArms } from "./FiveArms"
+import { Fountain } from "./Fountain"
+import { ThreeArms } from "./ThreeArms"
 
 export type Names = t.TypeOf<typeof Names>
 export const Names = t.union([
-  t.literal("Altar"),
+  // t.literal("None"),
+  t.literal("ThreeArms"),
   t.literal("FiveArms"),
   t.literal("Fountain"),
-  t.literal("ThreeArms"),
+  t.literal("Altar"),
 ])
 
 interface Sigil {
@@ -19,6 +20,11 @@ interface Sigil {
 }
 
 export const sigils: Record<Names, Sigil> = {
+  // None: {
+  //   Component: None,
+  //   height: 0,
+  //   width: 0,
+  // },
   Altar: {
     Component: Altar,
     height: 30,

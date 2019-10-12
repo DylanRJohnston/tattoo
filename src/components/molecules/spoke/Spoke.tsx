@@ -1,7 +1,7 @@
 import React from "react"
 import { Path, up } from "../../atoms/Path"
-import { bowties, Names as BowtieNames } from "./Bowties"
-import { Names as SigilNames, sigils } from "./Sigils"
+import { bowties, Names as BowtieNames } from "../bowties"
+import { Names as SigilNames, sigils } from "../sigils"
 
 export interface Props {
   sigil: SigilNames

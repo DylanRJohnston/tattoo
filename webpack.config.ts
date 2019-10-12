@@ -1,18 +1,21 @@
-import { Configuration } from 'webpack'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import { CheckerPlugin } from 'awesome-typescript-loader'
+import { CheckerPlugin } from "awesome-typescript-loader"
+import HtmlWebpackPlugin from "html-webpack-plugin"
+import { Configuration } from "webpack"
 
 const config: Configuration = {
-  entry: './src/index.tsx',
+  entry: "./src/index.tsx",
   output: {
-    filename: 'bundle-[hash].js',
+    filename: "bundle-[hash].js",
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: [".js", ".ts", ".tsx", ".css"],
   },
   plugins: [new HtmlWebpackPlugin(), new CheckerPlugin()],
   module: {
-    rules: [{ test: /\.tsx?$/, use: 'awesome-typescript-loader' }],
+    rules: [
+      { test: /\.tsx?$/, use: "awesome-typescript-loader" },
+      { test: /.css$/i, use: ["style-loader", "css-loader"] },
+    ],
   },
 }
 
