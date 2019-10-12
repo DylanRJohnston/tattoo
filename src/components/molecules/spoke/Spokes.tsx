@@ -1,5 +1,7 @@
 import { range } from "fp-ts/lib/Array"
 import React from "react"
+import { Names as BowtieNames } from "./Bowties"
+import { Names as SigilNames } from "./Sigils"
 import { Props as SpokeProps, Spoke } from "./Spoke"
 
 export interface Props {
@@ -13,8 +15,8 @@ const randomInteger = (upper: number, lower: number = 0) =>
 const oneOf = <A, _>(...as: A[]): A => as[randomInteger(as.length)]
 const randomSpoke = () =>
   ({
-    body: oneOf("none", "lines", "one", "two", "three", "four"),
-    sigil: oneOf("altar", "fountain", "three arms", "five arms"),
+    bowtie: oneOf(...BowtieNames.types.map(it => it.value)),
+    sigil: oneOf(...SigilNames.types.map(it => it.value)),
   } as const)
 
 export const Spokes = ({

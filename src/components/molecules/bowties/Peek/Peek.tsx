@@ -12,7 +12,12 @@ export const Peek = ({ width, height }: Props) => (
     <Path path={[semiCircle(width, "down")]} />
     <Path path={[up(height)]} />
     <Path path={[start(up(height)), semiCircle(width, "up")]} />
-    <Circle position={[left(width / 4), up(width / 8)]} radius={1} fill="black" />
-    <Circle position={[right(width / 4), up(width / 8)]} radius={1} fill="black" />
+    <Circle position={[left(width / 4), up(width / 8)]} strokeWidth={0} radius={1.5} fill="black" />
+    <Circle
+      position={[right(width / 4), up(width / 8)]}
+      strokeWidth={0}
+      radius={1.5}
+      fill="black"
+    />
   </>
 )
