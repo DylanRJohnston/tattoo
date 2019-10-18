@@ -17,17 +17,15 @@ jobs:
           key: node-modules-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - persist_to_workspace:
-          root: .
-          paths:
-            - node_modules
   build:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
-      - attach_workspace:
-          at: .
+       - restore_cache:
+          name: Restore node modules
+          keys:
+            - node-modules-{{ checksum "yarn.lock" }}
       - run:
           name: Build
           command: yarn run build
@@ -40,8 +38,10 @@ jobs:
       - image: catsoss/node-headless-chrome:latest
     steps:
       - checkout
-      - attach_workspace:
-          at: .
+      - restore_cache:
+          name: Restore node modules
+          keys:
+            - node-modules-{{ checksum "yarn.lock" }}
       - run:
           name: Lint
           command: yarn run lint
@@ -53,6 +53,10 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
+       - restore_cache:
+          name: Restore node modules
+          keys:
+            - node-modules-{{ checksum "yarn.lock" }}
       - attach_workspace:
           at: .
       - run:
