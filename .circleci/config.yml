@@ -1,8 +1,8 @@
 version: 2.0
 jobs:
-  depedencies:
+  depedencies: &job
     docker:
-      - image: circleci/node:latest
+      - image: catsoss/node-headless-chrome:latest
     steps:
       - checkout
       - &node_modules
@@ -19,8 +19,7 @@ jobs:
           paths:
             - node_modules
   build:
-    docker:
-      - image: circleci/node:latest
+    <<: *job
     steps:
       - checkout
       - *node_modules
@@ -32,8 +31,7 @@ jobs:
           paths:
             - dist
   test:
-    docker:
-      - image: catsoss/node-headless-chrome:latest
+    <<: *job
     steps:
       - checkout
       - *node_modules
@@ -44,8 +42,7 @@ jobs:
           name: Snapshot
           command: yarn run snapshot
   deploy:
-    docker:
-      - image: circleci/node:latest
+   <<: *job
     steps:
       - checkout
       - *node_modules
