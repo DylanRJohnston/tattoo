@@ -6,17 +6,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          name: Restore Yarn Package Cache
+          name: Restore node modules
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - node-modules-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
       - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          name: Save node modules
+          keys:
+            - node-modules-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - node_modules
       - persist_to_workspace:
           root: .
           paths:
@@ -37,7 +38,7 @@ jobs:
             - dist
   test:
     docker:
-      - image: percyio/agent:latest
+      - image: catsoss/node-headless-chrome:latest
     steps:
       - checkout
       - attach_workspace:
