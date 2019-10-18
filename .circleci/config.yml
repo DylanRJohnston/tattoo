@@ -37,7 +37,7 @@ jobs:
             - dist
   test:
     docker:
-      - image: circleci/node:latest
+      - image: percyio/agent:latest
     steps:
       - checkout
       - attach_workspace:
