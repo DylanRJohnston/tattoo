@@ -8,10 +8,11 @@
     "build": "webpack",
     "ship": "gh-pages -d dist -m '[ci skip]'",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "tslint": "tslint 'src/**/*.ts*'",
-    "prettier": "prettier 'src/**/*.ts*' --check",
-    "chromatic": "npx chromatic test --app-code=u6uh57ebpqf --exit-zero-on-changes"
+    "tslint": "./node_modules/.bin/tslint 'src/**/*.ts*'",
+    "prettier": "./node_modules/.bin/prettier 'src/**/*.ts*'",
+    "lint": "yarn prettier --check && yarn tslint",
+    "fix": "yarn prettier --write && yarn tslint --fix",
+    "snapshot": "build-storybook && percy-storybook"
   },
   "dependencies": {
     "@storybook/addon-knobs": "^5.1.10",
@@ -35,7 +36,6 @@
     "react": "^16.8.6",
     "react-docgen-typescript-loader": "^3.1.1",
     "react-dom": "^16.8.6",
-    "storybook-chromatic": "^2.2.2",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@percy/storybook": "^3.2.0",
     "@storybook/addon-actions": "^5.1.10",
     "@storybook/addon-links": "^5.1.10",
     "@storybook/addons": "^5.1.10",
