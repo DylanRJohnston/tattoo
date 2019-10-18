@@ -1,10 +1,8 @@
 version: 2.0
-jobs:
-  build:
-    docker:
-      - image: circleci/node:latest
+commands:
+  yarn-cache:
+    description: "Install depedencies using cache"
     steps:
-      - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -17,6 +15,13 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - yarn-cache
       - run:
           name: Build
           command: yarn run build
@@ -29,18 +34,7 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - yarn-cache
       - run:
           name: Prettier
           command: yarn run prettier
@@ -48,25 +42,14 @@ jobs:
           name: Lint
           command: yarn run tslint
       - run:
-          name: Chromatic
-          command: yarn run chromatic
+          name: Snapshot
+          command: yarn run snapshot
   deploy:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - yarn-cache
       - attach_workspace:
           at: dist
       - run:

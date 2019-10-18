@@ -9,7 +9,9 @@
     "ship": "gh-pages -d dist -m '[ci skip]'",
     "storybook": "start-storybook -p 6006",
     "tslint": "tslint 'src/**/*.ts*'",
-    "prettier": "prettier 'src/**/*.ts*' --check",
+    "prettier": "prettier 'src/**/*.ts*'",
+    "lint": "yarn prettier --check && yarn tslint",
+    "fix": "yarn prettier --write && yarn tslint --fix",
     "snapshot": "build-storybook && percy-storybook"
   },
   "dependencies": {
