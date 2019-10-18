@@ -1,8 +1,10 @@
 version: 2.0
-commands:
-  yarn-cache:
-    description: "Install depedencies using cache"
+jobs:
+  depedencies:
+    docker:
+      - image: circleci/node:latest
     steps:
+      - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -15,13 +17,17 @@ commands:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-jobs:
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
   build:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
-      - yarn-cache
+      - attach_workspace:
+          at: node_modules
       - run:
           name: Build
           command: yarn run build
@@ -34,7 +40,8 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - yarn-cache
+      - attach_workspace:
+          at: node_modules
       - run:
           name: Prettier
           command: yarn run prettier
@@ -49,7 +56,8 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - yarn-cache
+      - attach_workspace:
+          at: node_modules
       - attach_workspace:
           at: dist
       - run:
@@ -67,8 +75,13 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - test
-      - build
+      - depedencies
+      - test:
+          requires:
+            - depedencies
+      - build:
+          requires:
+            - depedencies
       - deploy:
           requires:
             - test
