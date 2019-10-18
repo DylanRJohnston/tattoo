@@ -42,7 +42,7 @@ jobs:
           name: Snapshot
           command: yarn run snapshot
   deploy:
-   <<: *job
+    <<: *job
     steps:
       - checkout
       - *node_modules
