@@ -27,7 +27,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: node_modules
+          at: .
       - run:
           name: Build
           command: yarn run build
@@ -41,7 +41,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: node_modules
+          at: .
       - run:
           name: Prettier
           command: yarn run prettier
@@ -57,9 +57,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: node_modules
-      - attach_workspace:
-          at: dist
+          at: .
       - run:
           name: Setup Git
           command: |
