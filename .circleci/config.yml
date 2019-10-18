@@ -14,8 +14,7 @@ jobs:
           command: yarn install --frozen-lockfile
       - save_cache:
           name: Save node modules
-          keys:
-            - node-modules-{{ checksum "yarn.lock" }}
+          key: node-modules-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - persist_to_workspace:
