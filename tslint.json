@@ -1,13 +1,17 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended", "tslint-react", "tslint-immutable", "tslint-config-prettier"],
+  "extends": ["tslint:all", "tslint-react", "tslint-immutable/all", "tslint-config-prettier"],
   "jsRules": {},
   "rules": {
     "interface-name": false,
     "no-empty-interface": false,
     "no-empty": false,
     "interface-over-type-literal": false,
-    "curly": [true, "as-needed"]
+    "curly": [true, "as-needed"],
+    "no-submodule-imports": [true, "fp-ts", "src"],
+    "no-implicit-dependencies": [true, ["src"]],
+    "completed-docs": false,
+    "no-void-expression": false
   },
   "rulesDirectory": []
 }

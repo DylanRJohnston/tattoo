@@ -1,11 +1,12 @@
 import React from "react"
+
 import { Circle } from "../../../atoms/Circle"
 import { bar, Path, start, up } from "../../../atoms/Path"
 import { ThreeArms } from "../ThreeArms"
 
 interface Props {
-  width: number
-  height: number
+  readonly height: number
+  readonly width: number
 }
 
 export const Altar = ({ width, height }: Props) => (

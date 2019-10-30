@@ -1,12 +1,8 @@
 version: 2.0
-jobs:
-  depedencies: &job
-    docker:
-      - image: catsoss/node-headless-chrome:latest
+commands:
+  node_modules:
     steps:
-      - checkout
-      - &node_modules
-        restore_cache:
+      - restore_cache:
           name: Restore node modules
           keys:
             - node-modules-{{ checksum "yarn.lock" }}
@@ -18,11 +14,13 @@ jobs:
           key: node-modules-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-  build:
-    <<: *job
+jobs:
+  build: &job
+    docker:
+      - image: catsoss/node-headless-chrome:latest
     steps:
       - checkout
-      - *node_modules
+      - node_modules
       - run:
           name: Build
           command: yarn run build
@@ -30,22 +28,30 @@ jobs:
           root: .
           paths:
             - dist
+  snapshot:
+    <<: *job
+    steps:
+      - checkout
+      - node_modules
+      - run:
+          name: Shapshot
+          command: yarn run shapshot
   test:
     <<: *job
     steps:
       - checkout
-      - *node_modules
+      - node_modules
       - run:
           name: Lint
           command: yarn run lint
       - run:
-          name: Snapshot
-          command: yarn run snapshot
+          name: Test
+          command: yarn run test
   deploy:
     <<: *job
     steps:
       - checkout
-      - *node_modules
+      - node_modules
       - attach_workspace:
           at: .
       - run:
@@ -63,13 +69,12 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - depedencies
-      - test:
-          requires:
-            - depedencies
-      - build:
-          requires:
-            - depedencies
+      - build
+      - test
+      - snapshot:
+          filters:
+            branches:
+              ignore: master
       - deploy:
           requires:
             - test

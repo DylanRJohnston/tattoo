@@ -1,24 +1,29 @@
 import { oneLine } from "common-tags"
-import { assertNever } from "../../../lib/assertNever"
+import { assertNever } from "src/lib/assertNever"
 
-export type Up = { type: "up"; amount: number }
+export type Up = { readonly amount: number; readonly type: "up" }
 export const up = (amount: number): Up => ({ type: "up", amount })
 
-export type Down = { type: "down"; amount: number }
+export type Down = { readonly amount: number; readonly type: "down" }
 export const down = (amount: number): Down => ({ type: "down", amount })
 
-export type Left = { type: "left"; amount: number }
+export type Left = { readonly amount: number; readonly type: "left" }
 export const left = (amount: number): Left => ({ type: "left", amount })
 
-export type Right = { type: "right"; amount: number }
+export type Right = { readonly amount: number; readonly type: "right" }
 export const right = (amount: number): Right => ({ type: "right", amount })
 
 export type Directions = Up | Down | Left | Right
 
-export type Bar = { type: "bar"; width: number }
+export type Bar = { readonly type: "bar"; readonly width: number }
 export const bar = (width: number): Bar => ({ type: "bar", width })
 
-type SemiCircle = { type: "semiCircle"; radius: number; direction: "up" | "down" }
+type SemiCircle = {
+  readonly direction: "up" | "down"
+  readonly radius: number
+  readonly type: "semiCircle"
+}
+
 export const semiCircle = (radius: number, direction: "up" | "down" = "up"): SemiCircle =>
   ({
     direction,
@@ -26,8 +31,8 @@ export const semiCircle = (radius: number, direction: "up" | "down" = "up"): Sem
     type: "semiCircle",
   } as const)
 
-export type Start = { type: "start"; x: number; y: number }
-export const start = (...position: Directions[]): Start =>
+export type Start = { readonly type: "start"; readonly x: number; readonly y: number }
+export const start = (...position: readonly Directions[]): Start =>
   position.reduce(
     (acc, it) => {
       switch (it.type) {
@@ -73,7 +78,7 @@ const serialiseSegment = (segment: Segment): string => {
   }
 }
 
-export type PathSegments = [Segment, ...Segment[]]
+export type PathSegments = readonly [Segment, ...readonly Segment[]]
 
 const serialisePathInternal = (path: PathSegments): string => path.map(serialiseSegment).join(" ")
 
