@@ -1,6 +1,6 @@
 version: 2.0
 commands:
-  node_modules:
+  nodemodules:
     steps:
       - restore_cache:
           name: Restore node modules
@@ -20,7 +20,7 @@ jobs:
       - image: catsoss/node-headless-chrome:latest
     steps:
       - checkout
-      - node_modules
+      - nodemodules
       - run:
           name: Build
           command: yarn run build
@@ -32,7 +32,7 @@ jobs:
     <<: *job
     steps:
       - checkout
-      - node_modules
+      - nodemodules
       - run:
           name: Shapshot
           command: yarn run shapshot
@@ -40,7 +40,7 @@ jobs:
     <<: *job
     steps:
       - checkout
-      - node_modules
+      - nodemodules
       - run:
           name: Lint
           command: yarn run lint
