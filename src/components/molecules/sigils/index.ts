@@ -1,4 +1,5 @@
 import * as t from "io-ts"
+import { Football } from "src/components/molecules/sigils/Football"
 
 import { Altar } from "./Altar"
 import { FiveArms } from "./FiveArms"
@@ -14,6 +15,7 @@ export const Names = t.union([
   t.literal("Fountain"),
   t.literal("Altar"),
   t.literal("Forest"),
+  t.literal("Football"),
 ])
 
 interface Sigil {
@@ -37,6 +39,11 @@ export const sigils: Record<Names, Sigil> = {
     Component: FiveArms,
     height: 20,
     width: 60,
+  },
+  Football: {
+    Component: Football,
+    height: 30,
+    width: 30,
   },
   Forest: {
     Component: Forest,
