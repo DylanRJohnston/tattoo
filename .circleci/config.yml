@@ -23,7 +23,7 @@ jobs:
       - nodemodules
       - run:
           name: Build
-          command: yarn run build
+          command: yarn build
       - persist_to_workspace:
           root: .
           paths:
@@ -35,7 +35,7 @@ jobs:
       - nodemodules
       - run:
           name: Shapshot
-          command: yarn run shapshot
+          command: yarn shapshot
   test:
     <<: *job
     steps:
@@ -43,10 +43,10 @@ jobs:
       - nodemodules
       - run:
           name: Lint
-          command: yarn run lint
+          command: yarn lint
       - run:
           name: Test
-          command: yarn run test
+          command: yarn test
   deploy:
     <<: *job
     steps:
