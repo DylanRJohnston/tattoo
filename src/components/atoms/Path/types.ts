@@ -51,7 +51,7 @@ const move: (direction: Directions) => (position: Position) => Position = matche
 export type Segment = Bar | Position | SemiCircle | Directions
 const toDirection = { up: 0, down: 1 } as const
 const serialiseSegment: (segment: Segment) => string = matcher({
-  bar: ({ width }) => `m${-width / 2},0 h${width}`,
+  bar: ({ width }) => `m${-width / 2},0 h${width} m${-width / 2},0`,
   down: ({ amount }) => `v${amount}`,
   left: ({ amount }) => `h-${amount}`,
   position: ({ x, y }) => `M${x},${y}`,
