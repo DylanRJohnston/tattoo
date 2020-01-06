@@ -1,5 +1,5 @@
-// import { storiesOf } from '@storybook/react'
-// import { App } from './app'
-// import React from 'react'
+// Import { storiesOf } from '@storybook/react'
+// Import { App } from './app'
+// Import React from 'react'
 
-// storiesOf('page|App', module).add('default', () => <App />)
+// StoriesOf('page|App', module).add('default', () => <App />)

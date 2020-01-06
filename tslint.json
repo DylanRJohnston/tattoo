@@ -11,7 +11,20 @@
     "no-submodule-imports": [true, "fp-ts", "src"],
     "no-implicit-dependencies": [true, ["src"]],
     "completed-docs": false,
-    "no-void-expression": false
+    "no-void-expression": false,
+    "file-name-casing": false,
+    "no-use-before-declare": false,
+    "variable-name": [true, "allow-pascal-case", "allow-leading-underscore"],
+    "no-magic-numbers": false,
+    "comment-format": false,
+    "readonly-keyword": false,
+    "no-expression-statement": false,
+    "only-arrow-functions": false,
+    "no-if-statement": false,
+    "return-undefined": false,
+    "typedef": false,
+    "no-import-side-effect": false,
+    "no-null-keyword": false
   },
   "rulesDirectory": []
 }

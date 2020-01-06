@@ -1,4 +1,5 @@
 import * as t from "io-ts"
+
 import { Lines } from "./Lines"
 import { None } from "./None/None"
 import { Peek } from "./Peek"
@@ -17,9 +18,9 @@ export const Names = t.union([
 ])
 
 interface Bowtie {
-  Component: React.FunctionComponent<{ width: number; height: number }>
-  width: number
-  height: number
+  readonly Component: React.FunctionComponent<{ readonly height: number; readonly width: number }>
+  readonly height: number
+  readonly width: number
 }
 
 export const bowties: Record<Names, Bowtie> = {

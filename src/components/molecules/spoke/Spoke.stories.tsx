@@ -1,10 +1,12 @@
 import { select } from "@storybook/addon-knobs"
 import { storiesOf } from "@storybook/react"
 import React from "react"
+
 import { Center } from "../../../lib/storyComponents/Center"
 import { SVG } from "../../../lib/storyComponents/SVG"
 import { Names as BowtieNames } from "../bowties"
 import { Names as SigilNames } from "../sigils"
+
 import { Spoke } from "./Spoke"
 
 storiesOf("molecules|Spoke", module)

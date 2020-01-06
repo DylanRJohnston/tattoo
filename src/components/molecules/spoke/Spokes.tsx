@@ -1,9 +1,10 @@
 import React from "react"
+
 import { Props as SpokeProps, Spoke } from "./Spoke"
 
 export interface Props {
-  phase: "odd" | "even"
-  spokes: SpokeProps[]
+  readonly phase: "odd" | "even"
+  readonly spokes: readonly SpokeProps[]
 }
 
 const rotation = (index: number, total: number, phase: "even" | "odd") =>

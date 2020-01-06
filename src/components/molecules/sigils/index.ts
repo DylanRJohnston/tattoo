@@ -1,4 +1,5 @@
 import * as t from "io-ts"
+
 import { Altar } from "./Altar"
 import { FiveArms } from "./FiveArms"
 import { Fountain } from "./Fountain"
@@ -6,7 +7,7 @@ import { ThreeArms } from "./ThreeArms"
 
 export type Names = t.TypeOf<typeof Names>
 export const Names = t.union([
-  // t.literal("None"),
+  // T.literal("None"),
   t.literal("ThreeArms"),
   t.literal("FiveArms"),
   t.literal("Fountain"),
@@ -14,16 +15,16 @@ export const Names = t.union([
 ])
 
 interface Sigil {
-  Component: React.FunctionComponent<{ width: number; height: number }>
-  width: number
-  height: number
+  readonly Component: React.FunctionComponent<{ readonly height: number; readonly width: number }>
+  readonly height: number
+  readonly width: number
 }
 
 export const sigils: Record<Names, Sigil> = {
   // None: {
   //   Component: None,
-  //   height: 0,
-  //   width: 0,
+  //   Height: 0,
+  //   Width: 0,
   // },
   Altar: {
     Component: Altar,

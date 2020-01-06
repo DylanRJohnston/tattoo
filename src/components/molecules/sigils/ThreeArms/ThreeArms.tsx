@@ -1,9 +1,10 @@
 import React from "react"
+
 import { left, Path, right, up } from "../../../atoms/Path"
 
 interface Props {
-  width: number
-  height: number
+  readonly height: number
+  readonly width: number
 }
 
 export const ThreeArms = ({ width, height }: Props) => (

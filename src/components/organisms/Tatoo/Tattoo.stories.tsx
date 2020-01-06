@@ -1,37 +1,37 @@
-// import { button, number } from "@storybook/addon-knobs"
-// import { storiesOf } from "@storybook/react"
-// import React, { useState } from "react"
-// import { StrokeWidthProvider } from "../../../lib/hooks/useStrokeWidth"
-// import { Center } from "../../../lib/storyComponents/Center"
-// import { Tattoo } from "./Tattoo"
+// Import { button, number } from "@storybook/addon-knobs"
+// Import { storiesOf } from "@storybook/react"
+// Import React, { useState } from "react"
+// Import { StrokeWidthProvider } from "../../../lib/hooks/useStrokeWidth"
+// Import { Center } from "../../../lib/storyComponents/Center"
+// Import { Tattoo } from "./Tattoo"
 
-// storiesOf("organism|Tattoo", module)
+// StoriesOf("organism|Tattoo", module)
 //   .addDecorator(Center)
 //   .add("default", () => {
-//     const strokeWidthKnob = number("Stroke Width", 3, {
-//       max: 25,
-//       min: 1,
-//       range: true,
-//       step: 1,
+//     Const strokeWidthKnob = number("Stroke Width", 3, {
+//       Max: 25,
+//       Min: 1,
+//       Range: true,
+//       Step: 1,
 //     })
 
-//     const Component = () => {
-//       const [, setState] = useState({})
-//       button("reset", () => setState({}))
+//     Const Component = () => {
+//       Const [, setState] = useState({})
+//       Button("reset", () => setState({}))
 
-//       return <Tattoo />
+//       Return <Tattoo />
 //     }
 
-//     return (
+//     Return (
 //       <StrokeWidthProvider value={strokeWidthKnob}>
 //         <svg
-//           style={{
-//             backgroundColor: "white",
-//             height: "90vmin",
-//             width: "90vmin",
+//           Style={{
+//             BackgroundColor: "white",
+//             Height: "90vmin",
+//             Width: "90vmin",
 //           }}
-//           viewBox={`-60 -60 120 120`}
-//           preserveAspectRatio="xMidYMid meet"
+//           ViewBox={`-60 -60 120 120`}
+//           PreserveAspectRatio="xMidYMid meet"
 //         >
 //           <Component />
 //         </svg>

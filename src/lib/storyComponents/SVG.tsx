@@ -1,12 +1,13 @@
 import { number } from "@storybook/addon-knobs"
 import React from "react"
+
 import { StrokeWidthProvider } from "../hooks/useStrokeWidth"
 
 interface Props {
-  strokeWidth: number
-  width: number
-  height: number
-  children: React.FunctionComponent<{ width: number; height: number }>
+  readonly children: React.FunctionComponent<{ readonly height: number; readonly width: number }>
+  readonly height: number
+  readonly strokeWidth: number
+  readonly width: number
 }
 
 export const SVG = ({ strokeWidth, width, height, children: Children }: Props) => {

@@ -1,5 +1,5 @@
-import { oneLine } from "common-tags"
-import { assertNever } from "src/lib/assertNever"
+import { Lens } from "monocle-ts"
+import { matcher } from "src/lib/match"
 
 export type Up = { readonly amount: number; readonly type: "up" }
 export const up = (amount: number): Up => ({ type: "up", amount })
@@ -31,56 +31,40 @@ export const semiCircle = (radius: number, direction: "up" | "down" = "up"): Sem
     type: "semiCircle",
   } as const)
 
-export type Start = { readonly type: "start"; readonly x: number; readonly y: number }
-export const start = (...position: readonly Directions[]): Start =>
-  position.reduce(
-    (acc, it) => {
-      switch (it.type) {
-        case "up":
-          return { ...acc, y: acc.y - it.amount }
-        case "down":
-          return { ...acc, y: acc.y + it.amount }
-        case "left":
-          return { ...acc, x: acc.x - it.amount }
-        case "right":
-          return { ...acc, x: acc.x + it.amount }
-        default:
-          return assertNever(it)
-      }
-    },
-    { type: "start", x: 0, y: 0 },
-  )
+export type Position = { readonly type: "position"; readonly x: number; readonly y: number }
+export const start = (...directions: readonly Directions[]): Position =>
+  directions.reduce((position, direction) => move(direction)(position), {
+    type: "position",
+    x: 0,
+    y: 0,
+  })
 
-export type Segment = Bar | Start | SemiCircle | Directions
-const serialiseSegment = (segment: Segment): string => {
-  switch (segment.type) {
-    case "start":
-      return `M${segment.x},${segment.y}`
-    case "bar":
-      return `m${-segment.width / 2},0 h${segment.width}`
-    case "up":
-      return `v-${segment.amount}`
-    case "down":
-      return `v${segment.amount}`
-    case "left":
-      return `h-${segment.amount}`
-    case "right":
-      return `h${segment.amount}`
-    case "semiCircle":
-      return oneLine`
-        m${-segment.radius / 2},0
-        a1,1
-        0,0,${segment.direction === "up" ? 0 : 1}
-        ${segment.radius},0
-      `
-    default:
-      return assertNever(segment)
-  }
-}
+const _x = Lens.fromProp<Position>()("x")
+const _y = Lens.fromProp<Position>()("y")
+const move: (direction: Directions) => (position: Position) => Position = matcher({
+  down: ({ amount }) => _y.modify(y => y + amount),
+  left: ({ amount }) => _x.modify(x => x - amount),
+  right: ({ amount }) => _x.modify(x => x + amount),
+  up: ({ amount }) => _y.modify(y => y - amount),
+})
+
+export type Segment = Bar | Position | SemiCircle | Directions
+const toDirection = { up: 0, down: 1 } as const
+const serialiseSegment: (segment: Segment) => string = matcher({
+  bar: ({ width }) => `m${-width / 2},0 h${width}`,
+  down: ({ amount }) => `v${amount}`,
+  left: ({ amount }) => `h-${amount}`,
+  position: ({ x, y }) => `M${x},${y}`,
+  right: ({ amount }) => `h${amount}`,
+  semiCircle: ({ radius: r, direction: d }) => `m${-r / 2},0 a1,1 0,0,${toDirection[d]} ${r},0`,
+  up: ({ amount }) => `v-${amount}`,
+})
 
 export type PathSegments = readonly [Segment, ...readonly Segment[]]
 
 const serialisePathInternal = (path: PathSegments): string => path.map(serialiseSegment).join(" ")
 
 export const serialisePath = (path: PathSegments): string =>
-  path[0].type === "start" ? serialisePathInternal(path) : serialisePathInternal([start(), ...path])
+  path[0].type === "position"
+    ? serialisePathInternal(path)
+    : serialisePathInternal([start(), ...path])
