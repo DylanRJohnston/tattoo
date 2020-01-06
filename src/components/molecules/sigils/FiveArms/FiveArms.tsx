@@ -1,9 +1,10 @@
 import React from "react"
+
 import { ThreeArms } from "../ThreeArms"
 
 interface Props {
-  width: number
-  height: number
+  readonly height: number
+  readonly width: number
 }
 
 export const FiveArms = ({ width, height }: Props) => (

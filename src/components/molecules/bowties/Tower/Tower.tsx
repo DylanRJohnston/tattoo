@@ -1,9 +1,10 @@
 import React from "react"
+
 import { bar, Path, semiCircle, start, up } from "../../../atoms/Path"
 
 interface Props {
-  width: number
-  height: number
+  readonly height: number
+  readonly width: number
 }
 
 export const Tower = ({ width, height }: Props) => (

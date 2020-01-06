@@ -1,11 +1,12 @@
 import React from "react"
+
 import { Path, up } from "../../atoms/Path"
 import { bowties, Names as BowtieNames } from "../bowties"
 import { Names as SigilNames, sigils } from "../sigils"
 
 export interface Props {
-  sigil: SigilNames
-  bowtie: BowtieNames
+  readonly bowtie: BowtieNames
+  readonly sigil: SigilNames
 }
 
 export const Spoke = ({ sigil, bowtie }: Props) => {

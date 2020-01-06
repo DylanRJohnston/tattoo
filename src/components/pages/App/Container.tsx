@@ -1,8 +1,9 @@
 import React from "react"
+
 import { StrokeWidthProvider } from "../../../lib/hooks/useStrokeWidth"
 
 interface Props {
-  children: React.ReactChild
+  readonly children: React.ReactChild
 }
 
 export const Container = ({ children }: Props) => (

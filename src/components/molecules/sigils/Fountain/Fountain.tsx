@@ -1,10 +1,11 @@
 import React from "react"
+
 import { Path, semiCircle, start, up } from "../../../atoms/Path"
 import { ThreeArms } from "../ThreeArms"
 
 interface Props {
-  width: number
-  height: number
+  readonly height: number
+  readonly width: number
 }
 
 export const Fountain = ({ width, height }: Props) => (

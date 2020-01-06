@@ -1,12 +1,13 @@
 import React from "react"
+
 import { useStrokeWidth } from "../../../lib/hooks/useStrokeWidth"
 import { Directions, start } from "../Path"
 
 interface Props {
-  position?: Directions[]
-  radius: number
-  fill?: "white" | "black" | "none"
-  strokeWidth?: number
+  readonly fill?: "white" | "black" | "none"
+  readonly position?: readonly Directions[]
+  readonly radius: number
+  readonly strokeWidth?: number
 }
 
 export const Circle = ({ position = [], radius, fill = "none", strokeWidth }: Props) => {

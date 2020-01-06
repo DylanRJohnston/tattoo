@@ -1,10 +1,12 @@
 import { map, range, scanLeft } from "fp-ts/lib/Array"
 import { pipe } from "fp-ts/lib/pipeable"
 import React, { useCallback, useEffect, useState } from "react"
+
 import { useInputEvent } from "../../../lib/hooks/useInputEvent"
 import { Names as BowtieNames } from "../../molecules/bowties"
 import { Names as SigilNames } from "../../molecules/sigils"
 import { Tattoo } from "../../organisms/Tatoo"
+
 import "./App.css"
 import { Container } from "./Container"
 

@@ -1,7 +1,9 @@
 import { storiesOf } from "@storybook/react"
 import React from "react"
+
 import { Center } from "../../../../lib/storyComponents/Center"
 import { SVG } from "../../../../lib/storyComponents/SVG"
+
 import { Tower } from "./Tower"
 
 storiesOf("bowties|Tower", module)

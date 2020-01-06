@@ -1,10 +1,11 @@
 import React from "react"
+
 import { Circle } from "../../../atoms/Circle"
 import { left, Path, right, semiCircle, start, up } from "../../../atoms/Path"
 
 interface Props {
-  width: number
-  height: number
+  readonly height: number
+  readonly width: number
 }
 
 export const Peek = ({ width, height }: Props) => (
