@@ -34,8 +34,8 @@ jobs:
       - checkout
       - nodemodules
       - run:
-          name: Shapshot
-          command: yarn shapshot
+          name: Snapshot
+          command: yarn snapshot
   test:
     <<: *job
     steps:
