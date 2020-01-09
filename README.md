@@ -8,20 +8,10 @@ Under Hugh Everett's "Many Worlds" interpretation of quantum mechanics the wave 
 ## TODO ##
 - [x] Add storybook
 - [x] Revert to absolute coordinates instead of using nested transforms. Too many issues with preserving shape size.
-- [ ] Add all sigils
-  - [x] Three arms
-  - [x] Five arms
-  - [x] Fountain
-  - [x] Altar
-  - [ ] Football
-  - [ ] Forest
-- [ ] Add all decorators
-  - [x] Three lines
-  - [x] Half circle
-  - [x] Half circle with line
-  - [x] Two half circles with line
-  - [x] Two half circles with dots
+- [x] Add all sigils
+- [x] Add all decorators
 - [x] Lehmer codes
+- [ ] Allow user input of tattoo number
+- [ ] Allow phase input as range
 - [ ] Quantum Random Number genenerator API
 - [ ] Interactive mode
-
