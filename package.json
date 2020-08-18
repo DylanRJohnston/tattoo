@@ -24,7 +24,7 @@
     "@types/react-dom": "^16.8.5",
     "@types/storybook__addon-knobs": "^5.0.3",
     "@types/storybook__react": "^4.0.2",
-    "@types/webpack": "^4.32.1",
+    "@types/webpack": "^4.41.21",
     "common-tags": "^1.8.0",
     "css-loader": "^3.2.0",
     "fp-ts": "^2.0.3",
