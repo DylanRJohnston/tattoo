@@ -15,7 +15,7 @@
     "snapshot": "build-storybook && percy-storybook"
   },
   "dependencies": {
-    "@storybook/addon-knobs": "^5.1.10",
+    "@storybook/addon-knobs": "^6.1.0",
     "@storybook/cli": "^5.1.10",
     "@storybook/react": "^5.1.10",
     "@types/common-tags": "^1.8.0",
