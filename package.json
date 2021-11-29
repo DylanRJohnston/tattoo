@@ -17,7 +17,7 @@
   "dependencies": {
     "@storybook/addon-knobs": "^5.1.10",
     "@storybook/cli": "^5.1.10",
-    "@storybook/react": "^5.1.10",
+    "@storybook/react": "^6.1.7",
     "@types/common-tags": "^1.8.0",
     "@types/html-webpack-plugin": "^3.2.1",
     "@types/react": "^16.8.23",
