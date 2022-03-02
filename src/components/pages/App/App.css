@@ -29,3 +29,8 @@
 input {
   margin-right: 8px;
 }
+
+.break {
+  border: 1px solid grey;
+  margin: 8px 0px;
+}

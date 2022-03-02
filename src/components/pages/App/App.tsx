@@ -1,5 +1,6 @@
 import { map, range, scanLeft } from "fp-ts/lib/Array"
 import { pipe } from "fp-ts/lib/pipeable"
+import { flow } from "fp-ts/lib/function"
 import React, { useCallback, useEffect, useState } from "react"
 
 import { useInputEvent } from "../../../lib/hooks/useInputEvent"
@@ -31,8 +32,25 @@ const numberToTatoo = (num: number, numSpokes: number) =>
 const incrementTatoo = (numTatoos: number) => (num: number) => (num < numTatoos ? num + 1 : 1)
 const randomTatoo = (numTatoos: number) => (_: number) => Math.ceil(Math.random() * numTatoos)
 
+const clamp = (lower: number, upper: number) => (x: number): number =>
+  Math.max(Math.min(x, upper), lower)
+
 export const App = () => {
-  const [tattoo, setTattoo] = useState(1)
+  const [numSpokes, setNumSpokes] = useState(3)
+  const onNumSpokesChange = useInputEvent(setNumSpokes)
+
+  const tattooCount = spokeRadix ** numSpokes - 1
+
+  const [tattoo, setTattoo] = useState(0)
+  const onTattooChange = useInputEvent(
+    flow(
+      clamp(0, tattooCount),
+      setTattoo,
+    ),
+  )
+
+  const [animate, setAnimate] = useState(true)
+  const onAnimateChange = useCallback(() => setAnimate(!animate), [setAnimate, animate])
 
   const [Hz, setHz] = useState(1)
   const onHzChange = useInputEvent(setHz)
@@ -43,13 +61,8 @@ export const App = () => {
   const [phase, setPhase] = useState(false)
   const onPhaseChange = useCallback(() => setPhase(!phase), [setPhase, phase])
 
-  const [numSpokes, setNumSpokes] = useState(3)
-  const onNumSpokesChange = useInputEvent(setNumSpokes)
-
-  const tattooCount = spokeRadix ** numSpokes
-
   useEffect(() => {
-    if (Hz === 0) return
+    if (Hz === 0 || !animate) return
 
     const intervalHandle = setInterval(() => {
       const nextTattoo = random ? randomTatoo : incrementTatoo
@@ -58,7 +71,7 @@ export const App = () => {
     }, Math.floor(1000 / Hz))
 
     return () => clearInterval(intervalHandle)
-  }, [Hz, tattooCount, random])
+  }, [Hz, animate, tattooCount, random])
 
   return (
     <>
@@ -66,16 +79,33 @@ export const App = () => {
         <div className="row">
           <p className={"description"}>Sigil</p>
           <p>
-            {tattoo.toLocaleString()} of {tattooCount.toLocaleString()}
+            <input size={tattoo.toLocaleString().length + 1} value={tattoo.toLocaleString()} onChange={onTattooChange} />
+            of {tattooCount.toLocaleString()}
           </p>
         </div>
         <div className="row">
-          <p className={"description"}>Random</p>
-          <input type="checkbox" checked={random} onChange={onRadomChange} />
+          <p className={"description"}>{numSpokes} Spokes</p>
+          <input
+            className="slider"
+            type="range"
+            value={numSpokes}
+            onChange={onNumSpokesChange}
+            min="1"
+            max="8"
+          />
         </div>
         <div className="row">
           <p className={"description"}>Phase</p>
           <input type="checkbox" checked={phase} onChange={onPhaseChange} />
+        </div>
+        <div className="break" />
+        <div className="row">
+          <p className={"description"}>Animate</p>
+          <input type="checkbox" checked={animate} onChange={onAnimateChange} />
+        </div>
+        <div className="row">
+          <p className={"description"}>Random</p>
+          <input type="checkbox" checked={random} onChange={onRadomChange} />
         </div>
         <div className="row">
           <p className={"description"}>{Hz} Hz</p>
@@ -89,20 +119,9 @@ export const App = () => {
             id="myRange"
           />
         </div>
-        <div className="row">
-          <p className={"description"}>{numSpokes} Spokes</p>
-          <input
-            className="slider"
-            type="range"
-            value={numSpokes}
-            onChange={onNumSpokesChange}
-            min="1"
-            max="8"
-          />
-        </div>
       </div>
       <Container>
-        <Tattoo phase={phase ? "odd" : "even"} spokes={numberToTatoo(tattoo - 1, numSpokes)} />
+        <Tattoo phase={phase ? "odd" : "even"} spokes={numberToTatoo(tattoo, numSpokes)} />
       </Container>
     </>
   )
