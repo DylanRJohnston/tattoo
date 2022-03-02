@@ -30,11 +30,9 @@ const numberToTatoo = (num: number, numSpokes: number) =>
 
 const incrementTatoo = (numTatoos: number) => (num: number) => (num < numTatoos ? num + 1 : 1)
 const randomTatoo = (numTatoos: number) => (_: number) => Math.ceil(Math.random() * numTatoos)
-const nextNum = (numTatoos: number, random: boolean) =>
-  random ? randomTatoo(numTatoos) : incrementTatoo(numTatoos)
 
 export const App = () => {
-  const [num, setNum] = useState(1)
+  const [tattoo, setTattoo] = useState(1)
 
   const [Hz, setHz] = useState(1)
   const onHzChange = useInputEvent(setHz)
@@ -48,26 +46,27 @@ export const App = () => {
   const [numSpokes, setNumSpokes] = useState(3)
   const onNumSpokesChange = useInputEvent(setNumSpokes)
 
-  const numTatoos = spokeRadix ** numSpokes
+  const tattooCount = spokeRadix ** numSpokes
 
-  useEffect(
-    function setNextNum() {
-      if (Hz === 0) return
+  useEffect(() => {
+    if (Hz === 0) return
 
-      const timeout = setTimeout(() => setNum(nextNum(numTatoos, random)), Math.floor(1000 / Hz))
+    const intervalHandle = setInterval(() => {
+      const nextTattoo = random ? randomTatoo : incrementTatoo
 
-      return () => clearTimeout(timeout)
-    },
-    [num, Hz, numTatoos, random, phase],
-  )
+      setTattoo(nextTattoo(tattooCount))
+    }, Math.floor(1000 / Hz))
+
+    return () => clearInterval(intervalHandle)
+  }, [Hz, tattooCount, random])
 
   return (
     <>
       <div className="options">
         <div className="row">
-          <p className={"description"}>Tattoo</p>
+          <p className={"description"}>Sigil</p>
           <p>
-            {num.toLocaleString()} of {numTatoos.toLocaleString()}
+            {tattoo.toLocaleString()} of {tattooCount.toLocaleString()}
           </p>
         </div>
         <div className="row">
@@ -103,7 +102,7 @@ export const App = () => {
         </div>
       </div>
       <Container>
-        <Tattoo phase={phase ? "odd" : "even"} spokes={numberToTatoo(num - 1, numSpokes)} />
+        <Tattoo phase={phase ? "odd" : "even"} spokes={numberToTatoo(tattoo - 1, numSpokes)} />
       </Container>
     </>
   )
