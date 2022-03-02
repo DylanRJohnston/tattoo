@@ -1,6 +1,6 @@
 import { map, range, scanLeft } from "fp-ts/lib/Array"
-import { pipe } from "fp-ts/lib/pipeable"
 import { flow } from "fp-ts/lib/function"
+import { pipe } from "fp-ts/lib/pipeable"
 import React, { useCallback, useEffect, useState } from "react"
 
 import { useInputEvent } from "../../../lib/hooks/useInputEvent"
@@ -79,7 +79,11 @@ export const App = () => {
         <div className="row">
           <p className={"description"}>Sigil</p>
           <p>
-            <input size={tattoo.toLocaleString().length + 1} value={tattoo.toLocaleString()} onChange={onTattooChange} />
+            <input
+              size={tattoo.toLocaleString().length + 1}
+              value={tattoo.toLocaleString()}
+              onChange={onTattooChange}
+            />
             of {tattooCount.toLocaleString()}
           </p>
         </div>
