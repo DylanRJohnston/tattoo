@@ -3,7 +3,7 @@ name: CD
 # Controls when the workflow will run
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 jobs:
   build:
