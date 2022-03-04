@@ -1,14 +1,12 @@
-name: CI
+name: CI CD
 
 # Controls when the workflow will run
 on:
-  pull_request:
-    branches: [master]
+  push:
   workflow_dispatch:
 jobs:
-  build:
+  CI_CD:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -21,3 +19,9 @@ jobs:
         run: yarn lint
       - name: Build
         run: yarn build
+      - name: Deploy
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
