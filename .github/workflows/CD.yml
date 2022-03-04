@@ -11,6 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Install
+        run: yarn --frozen-lockfile
       - name: Lint
         run: yarn lint
       - name: Build
